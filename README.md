@@ -1,33 +1,32 @@
 # server-monitor
-Checks if ips:ports are up and running.
+Checks if `ipv4_addresses:ports` are up and running.
 
 ## Usage
 ```
-# wget https://raw.githubusercontent.com/Fmstrat/server-monitor/master/server-monitor.py
+# curl -O https://raw.githubusercontent.com/Zuquim/server-monitor/master/server-monitor.py
 # ./server-monitor.py --help
-usage: server-monitor.py [-h] [-u SMTPUSER] [-p SMTPPASS] [-l SMTPSUBJECT] [-o INTERVAL] [-r RETRY] [-d DELAY] [-t TIMEOUT] -s SMTPSERVER -f SMTPFROM
-                         -k SMTPTO -m MONITOR [MONITOR ...]
+usage: server-monitor.py [-h] [-o INTERVAL] [-r RETRY] [-d DELAY] [-t TIMEOUT] -m MONITOR [MONITOR ...]
 
 Check if hosts are up.
 
 optional arguments:
   -h, --help                                                 show this help message and exit
-  -u SMTPUSER, --smtpuser SMTPUSER                           The SMTP username
-  -p SMTPPASS, --smtppass SMTPPASS                           The SMTP password
-  -l SMTPSUBJECT, --smtpsubject SMTPSUBJECT                  The SMTP subject line
+ # -u SMTPUSER, --smtpuser SMTPUSER                           [DISABLED] The SMTP username
+ # -p SMTPPASS, --smtppass SMTPPASS                           [DISABLED] The SMTP password
+ # -l SMTPSUBJECT, --smtpsubject SMTPSUBJECT                  [DISABLED] The SMTP subject line
   -o INTERVAL, --interval INTERVAL                           The interval in minutes between checks (default 60)
   -r RETRY, --retry RETRY                                    The retry count when a connection fails (default 5)
   -d DELAY, --delay DELAY                                    The retry delay in seconds when a connection fails (default 10)
   -t TIMEOUT, --timeout TIMEOUT                              The connection timeout in seconds (default 3)
-  -y PUSHOVERAPI, --pushoverapi PUSHOVERAPI                  The pushover.net API key
-  -z PUSHOVERUSER, --pushoveruser PUSHOVERUSER               The pushover.net user key
+ # -y PUSHOVERAPI, --pushoverapi PUSHOVERAPI                  [DISABLED] The pushover.net API key
+ # -z PUSHOVERUSER, --pushoveruser PUSHOVERUSER               [DISABLED] The pushover.net user key
 
 
 required arguments:
-  -s SMTPSERVER, --smtpserver SMTPSERVER                     The SMTP server:port
-  -f SMTPFROM, --smtpfrom SMTPFROM                           The FROM email address
-  -k SMTPTO, --smtpto SMTPTO                                 The TO email address
-  -m MONITOR [MONITOR ...], --monitor MONITOR [MONITOR ...]  The servers to monitor. Format: "<server>:<port> <server>:<port>"
+ # -s SMTPSERVER, --smtpserver SMTPSERVER                     [DISABLED] The SMTP server:port
+ # -f SMTPFROM, --smtpfrom SMTPFROM                           [DISABLED] The FROM email address
+ # -k SMTPTO, --smtpto SMTPTO                                 [DISABLED] The TO email address
+  -m MONITOR [MONITOR ...], --monitor MONITOR [MONITOR ...]  The servers to monitor. Format: "<server>:<port> <server>:<port>[:udp]"
 ```
 
 ## Docker
@@ -42,3 +41,6 @@ The following example is for docker-compose.
       - OPTIONS=--smtpserver mail:25 --smtpfrom user@domain.tld --smtpto user@domain.tld --monitor google.com:443 microsoft.com:443
     restart: "no"
 ```
+---
+## Forked from
+[Fmstrat/server-monitor](https://github.com/Fmstrat/server-monitor)
